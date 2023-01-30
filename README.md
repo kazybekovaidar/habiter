@@ -37,6 +37,7 @@ Change the above path to your local folder
 
 ### Step 6: IntelliJ Idea database set up
 ![img.png](img.png)
+
 On the right side of the IntelliJ you will see the database bar
 Open it and press on the plus button
 
