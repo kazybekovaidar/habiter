@@ -42,4 +42,5 @@ On the right side of the IntelliJ you will see the database bar
 Open it and press on the plus button
 
 ![img_1.png](img_1.png)
+
 Set up this page as showed in the picture
