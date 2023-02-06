@@ -42,3 +42,4 @@ Open it and press on the plus button
 
 ![img_1.png](img_1.png)
 Set up this page as showed in the picture
+### Password is admin
