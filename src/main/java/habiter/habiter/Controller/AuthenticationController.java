@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -51,12 +53,20 @@ public class AuthenticationController {
         return ResponseEntity.ok(savedUser);
     }
     @PostMapping("/signin")
-    public String authenticateAndGetToken(@RequestBody SigninModel authRequest) {
+    public Map<String, Object> authenticateAndGetToken(@RequestBody SigninModel authRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
+        Map<String, Object> map = new HashMap<>();
+        User user = null;
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authRequest.getEmail());
+            map.put("token",jwtService.generateToken(authRequest.getEmail()));
+            user = userService.findByEmail(authRequest.getEmail());
+            map.put("fullName", user.getFirstname() + " " + user.getLastname());
+            map.put("email", user.getEmail());
+            map.put("id", user.getId());
+            return map;
         } else {
             throw new UsernameNotFoundException("invalid user request !");
         }
     }
+
 }

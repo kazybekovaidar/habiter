@@ -6,6 +6,7 @@ import habiter.habiter.Enums.RoleName;
 import habiter.habiter.Exeptions.AppException;
 import habiter.habiter.Repositories.RoleRepository;
 import habiter.habiter.Repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class UserService{
         return userRepository.findByEmail(email.trim().toLowerCase());
     }
 
+    @Transactional
     public User create(User user) {
         // Creating user's account
         user.setEmail(user.getEmail().trim().toLowerCase());
@@ -37,5 +39,9 @@ public class UserService{
         user.setRoles(Collections.singleton(userRole));
 
         return userRepository.save(user);
+    }
+
+    public User findUserById(Long userId) {
+        return userRepository.findUserById(userId);
     }
 }
