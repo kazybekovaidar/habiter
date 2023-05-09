@@ -45,6 +45,14 @@ public class HabitController {
         habitService.deleteHabit(userId, habitId);
         return ResponseEntity.ok().build();
     }
-
-
+    @PutMapping("updateProgress/{habitId}/{userId}")
+    public ResponseEntity<?> updateProgress(@PathVariable Long habitId, @PathVariable Long userId) throws Exception {
+        habitService.updateProgress(habitId, userId);
+        return ResponseEntity.ok().build();
+    }
+    @PutMapping("updateCompleted/{habitId}/{userId}")
+    public ResponseEntity<?> updateCompleted(@PathVariable Long habitId, @PathVariable Long userId) throws Exception {
+        habitService.updateCompleted(habitId, userId);
+        return ResponseEntity.ok().build();
+    }
 }

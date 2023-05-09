@@ -36,6 +36,8 @@ public class HabitService {
         habit.setUser(user);
         habit.setStartDate(habitModel.getStartDate());
         habit.setEndDate(habitModel.getEndDate());
+        habit.setProgress(0);
+        habit.setCompleted(false);
         //  habitService.create(habitModel, user);
         StandardHabitCard habitCard = standardHabitCardRepository.save(habit);
         return habitCard;
@@ -69,5 +71,20 @@ public class HabitService {
         StandardHabitCard habit = standardHabitCardRepository.findStandardHabitCardByUserAndId(user, habitId);
         // delete the habit
         standardHabitCardRepository.delete(habit);
+    }
+
+    public void updateProgress(Long habitId, Long userId) throws Exception {
+        User user = userService.findUserById(userId);
+        StandardHabitCard habitCard = standardHabitCardRepository.findStandardHabitCardByUserAndId(user, habitId);
+        int progress = habitCard.getProgress()+1;
+        habitCard.setProgress(progress);
+        standardHabitCardRepository.save(habitCard);
+    }
+
+    public void updateCompleted(Long habitId, Long userId) {
+        User user = userService.findUserById(userId);
+        StandardHabitCard habitCard = standardHabitCardRepository.findStandardHabitCardByUserAndId(user, habitId);
+        habitCard.setCompleted(true);
+        standardHabitCardRepository.save(habitCard);
     }
 }

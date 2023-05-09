@@ -18,4 +18,6 @@ public class HabitModel {
     private Integer goal;
     private LocalDate startDate;
     private LocalDate endDate;
+//    private Boolean completed;
+//    private Integer progress;
 }
